@@ -1,5 +1,4 @@
-#include "./inputHandling.HC"
-#include "./graphicsHandling.HC"
+#include "./inputHandling.HC"
 
 Keys keys;
 
@@ -15,6 +14,8 @@ U0 Main() {
   DocCursor;
   DocClear;
 
+  InitializeBullets();
+
   Fs->draw_it = &DrawIt;
 
   try {
@@ -25,7 +26,7 @@ U0 Main() {
             case CH_SPACE: keys.space = TRUE; break;
             case CH_SHIFT_ESC: goto done;
             case 0:
-              switch (arg2.u8[0]) {
+              switch (arg2.u8[0]) {
                 case SC_CURSOR_UP: keys.up = TRUE; break;
                 case SC_CURSOR_DOWN: keys.down = TRUE; break;
                 case SC_CURSOR_LEFT: keys.left = TRUE; break;

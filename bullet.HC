@@ -6,27 +6,53 @@ class Bullet{
     I32 z;
     F64 angle;
     F64 speed;
+    Bool active;
 };
 
-Bullet bullets[100];
-I32 bullet_count = 0;
+Bullet bullets[10];
+
+U0 InitializeBullets(){
+    I32 i;
+    for (i = 0; i < 10; i++) {
+        bullets[i].x = 0;
+        bullets[i].y = 0;
+        bullets[i].z = 0;
+        bullets[i].angle = 0;
+        bullets[i].active = FALSE;
+        bullets[i].speed = 0;
+    }
+}
 
 U0 ShootBullet() {
-    if (bullet_count < 100){
-        bullets[bullet_count].x = x;
-        bullets[bullet_count].y = y;
-        bullets[bullet_count].z = z;
-        bullets[bullet_count].angle = angle;
-        bullets[bullet_count].speed = 20;
-        bullet_count++;
+    I32 i;
+    for (i = 0; i < 10; i++){
+        if (!bullets[i].active){
+            bullets[i].x = x;
+            bullets[i].y = y;
+            bullets[i].z = z;
+            bullets[i].angle = angle;
+            bullets[i].speed = 20;
+            bullets[i].active = TRUE;
+            break;
+        }
     }
 }
 
 
 U0 UpdateBullets(){
     I32 i;
-    for (i = 0; i < bullet_count; i++){
-        bullets[i].x += bullets[i].speed * Cos(bullets[i].angle);
-        bullets[i].y += bullets[i].speed * Sin(bullets[i].angle);
+    for (i = 0; i < 10; i++) {
+        if (bullets[i].active) {
+            bullets[i].x += bullets[i].speed * Cos(bullets[i].angle);
+            bullets[i].y += bullets[i].speed * Sin(bullets[i].angle);
+
+            // Deactivate bullet if it goes offscreen
+            if(bullets[i].active) {
+                if (bullets[i].x < 0 || bullets[i].x > 640 || bullets[i].y < 0 || bullets[i].y > 480) {
+                    bullets[i].active = FALSE;
+                    bullets[i].speed = 0;
+                }
+            }
+        }
     }
 }
