@@ -1,4 +1,4 @@
-#include "./inputHandling.HC"
+#include "./inputHandling.HC"
 
 Keys keys;
 
@@ -51,6 +51,7 @@ U0 Main() {
           break;
       }
       HandleInput(&keys);
+      ActivateAsteroid;
     }
   done:
   }
