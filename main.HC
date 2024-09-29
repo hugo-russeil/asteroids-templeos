@@ -15,8 +15,8 @@ U0 Main() {
   DocClear;
 
   Seed;
-  InitializeBullets;
-  InitializeAsteroids;
+  InitialiseBullets;
+  InitialiseAsteroids;
 
   Fs->draw_it = &DrawIt;
 

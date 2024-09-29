@@ -10,7 +10,7 @@ class Asteroid {
 
 Asteroid asteroids[10];
 
-U0 InitializeAsteroids() {
+U0 InitialiseAsteroids() {
     I8 i;
     for (i = 0; i < 10; i++) {
         asteroids[i].x = 0;

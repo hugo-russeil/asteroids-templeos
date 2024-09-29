@@ -11,7 +11,7 @@ class Bullet{
 
 Bullet bullets[10];
 
-U0 InitializeBullets(){
+U0 InitialiseBullets(){
     U8 i;
     for (i = 0; i < 10; i++) {
         bullets[i].x = 0;
