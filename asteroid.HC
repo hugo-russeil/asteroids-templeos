@@ -24,13 +24,38 @@ U0 InitializeAsteroids() {
 }
 
 U0 ActivateAsteroid() {
-    I32 i;
+    U8 i;
     for (i = 0; i < 10; i++) {
         if (!asteroids[i].active) {
-            asteroids[i].x = Rand() % 640; // Random position outside the screen
-            asteroids[i].y = Rand() % 480;
-            asteroids[i].angle = Rand() % 360;
-            asteroids[i].speed = 5 + Rand() % 5; // Random speed between 5 and 10
+            U16 side = RandU16() % 4; // Random side of the screen
+            switch (side) {
+                case 0:
+                    // Random position on the left side of the screen
+                    asteroids[i].x = -10; // Slightly offscreen
+                    asteroids[i].y = RandI32() % 480;
+                    asteroids[i].angle = 0 + (Rand() % 180);
+                    break;
+                case 1:
+                    // Random position on the right side of the screen
+                    asteroids[i].x = 650; // Slightly offscreen
+                    asteroids[i].y = RandI32() % 480;
+                    asteroids[i].angle = 180 + (Rand() % 180);
+                    break;
+                case 2:
+                    // Random position on the top side of the screen
+                    asteroids[i].x = RandI32() % 640;
+                    asteroids[i].y = -10; // Slightly offscreen
+                    asteroids[i].angle = 90 + (Rand() % 180);
+                    break;
+                case 3:
+                    // Random position on the bottom side of the screen
+                    asteroids[i].x = RandI32() % 640;
+                    asteroids[i].y = 490; // Slightly offscreen
+                    asteroids[i].angle = 270 + (Rand() % 180);
+                    break;
+            }
+
+            asteroids[i].speed = 5 + (Rand() % 5); // Random speed between 5 and 10
             asteroids[i].active = TRUE;
             break;
         }
@@ -73,10 +98,11 @@ U0 UpdateAsteroids() {
             asteroids[i].x += asteroids[i].speed * Cos(asteroids[i].angle);
             asteroids[i].y += asteroids[i].speed * Sin(asteroids[i].angle);
 
-            // Deactivate asteroid if it goes offscreen
-            if (asteroids[i].x < 0 || asteroids[i].x > 640 || asteroids[i].y < 0 || asteroids[i].y > 480) {
+            // Deactivate asteroid if it goes too far offscreen
+            if (asteroids[i].x < -1000 || asteroids[i].x > 1000 || asteroids[i].y < -1000 || asteroids[i].y > 1000) {
                 asteroids[i].active = FALSE;
             }
         }
     }
+    ActivateAsteroid;
 }

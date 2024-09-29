@@ -14,17 +14,19 @@ U0 Main() {
   DocCursor;
   DocClear;
 
-  InitializeBullets();
+  Seed;
+  InitializeBullets;
+  InitializeAsteroids;
 
   Fs->draw_it = &DrawIt;
 
   try {
     while (TRUE) {
-      switch (GetMsg(&arg1, &arg2, 1 << MSG_KEY_DOWN | 1 << MSG_KEY_UP)) {
+      switch (GetMsg(&arg1, &arg2, 1 << MSG_KEY_DOWN | 1 << MSG_KEY_UP)) {
         case MSG_KEY_DOWN:
           switch (arg1) {
             case CH_SPACE: keys.space = TRUE; break;
-            case CH_SHIFT_ESC: goto done;
+            case CH_ESC: goto done;
             case 0:
               switch (arg2.u8[0]) {
                 case SC_CURSOR_UP: keys.up = TRUE; break;
@@ -51,7 +53,7 @@ U0 Main() {
           break;
       }
       HandleInput(&keys);
-      ActivateAsteroid;
+      ActivateAsteroid;
     }
   done:
   }
@@ -61,6 +63,7 @@ U0 Main() {
     SettingsPop;
     MenuPop;
   }
+  return;
 }
 
 Main;
