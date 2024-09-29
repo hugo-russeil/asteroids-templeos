@@ -1,18 +1,18 @@
 #include "./spaceship.HC"
 
 class Bullet{
-    I32 x;
-    I32 y;
-    I32 z;
+    I16 x;
+    I16 y;
+    U8 z;
     F64 angle;
-    F64 speed;
+    U8 speed;
     Bool active;
 };
 
 Bullet bullets[10];
 
 U0 InitializeBullets(){
-    I32 i;
+    U8 i;
     for (i = 0; i < 10; i++) {
         bullets[i].x = 0;
         bullets[i].y = 0;
@@ -24,7 +24,7 @@ U0 InitializeBullets(){
 }
 
 U0 ShootBullet() {
-    I32 i;
+    U8 i;
     for (i = 0; i < 10; i++){
         if (!bullets[i].active){
             bullets[i].x = x;
@@ -40,7 +40,7 @@ U0 ShootBullet() {
 
 
 U0 UpdateBullets(){
-    I32 i;
+    U8 i;
     for (i = 0; i < 10; i++) {
         if (bullets[i].active) {
             bullets[i].x += bullets[i].speed * Cos(bullets[i].angle);

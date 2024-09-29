@@ -1,6 +1,6 @@
-I32 x = 250;
-I32 y = 250;
-I32 z = 0;
+I16 x = 250;
+I16 y = 250;
+U8 z = 0; // Always 0 so you get the least possible amount of memory.
 F64 angle = 0;
 
-F64 speed = 10;
+U8 speed = 10;

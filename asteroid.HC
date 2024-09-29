@@ -1,11 +1,11 @@
 class Asteroid {
-    I32 x;
-    I32 y;
-    I32 z;
+    I16 x;
+    I16 y;
+    U8 z;
     F64 angle;
-    F64 speed;
+    U8 speed;
     Bool active;
-    I8 size;
+    U8 size;
 };
 
 Asteroid asteroids[10];
@@ -32,39 +32,39 @@ U0 ActivateAsteroid() {
                 case 0:
                     // Random position on the left side of the screen
                     asteroids[i].x = -10; // Slightly offscreen
-                    asteroids[i].y = RandI32() % 480;
+                    asteroids[i].y = RandI16() % 480;
                     asteroids[i].angle = 0 + (Rand() % 180);
                     break;
                 case 1:
                     // Random position on the right side of the screen
                     asteroids[i].x = 650; // Slightly offscreen
-                    asteroids[i].y = RandI32() % 480;
+                    asteroids[i].y = RandI16() % 480;
                     asteroids[i].angle = 180 + (Rand() % 180);
                     break;
                 case 2:
                     // Random position on the top side of the screen
-                    asteroids[i].x = RandI32() % 640;
+                    asteroids[i].x = RandI16() % 640;
                     asteroids[i].y = -10; // Slightly offscreen
                     asteroids[i].angle = 90 + (Rand() % 180);
                     break;
                 case 3:
                     // Random position on the bottom side of the screen
-                    asteroids[i].x = RandI32() % 640;
+                    asteroids[i].x = RandI16() % 640;
                     asteroids[i].y = 490; // Slightly offscreen
                     asteroids[i].angle = 270 + (Rand() % 180);
                     break;
             }
 
-            asteroids[i].speed = 5 + (Rand() % 5); // Random speed between 5 and 10
+            asteroids[i].speed = 5 + (RandU16() % 5); // Random speed between 5 and 10
             asteroids[i].active = TRUE;
             break;
         }
     }
 }
 
-U0 SplitAsteroid(I32 index) {
+U0 SplitAsteroid(U8 index) {
     if (asteroids[index].size > 1) {
-        I32 i;
+        U8 i;
         for (i = 0; i < 10; i++) {
             if (!asteroids[i].active) {
                 asteroids[i].x = asteroids[index].x;
@@ -92,7 +92,7 @@ U0 SplitAsteroid(I32 index) {
 }
 
 U0 UpdateAsteroids() {
-    I32 i;
+    U8 i;
     for (i = 0; i < 10; i++) {
         if (asteroids[i].active) {
             asteroids[i].x += asteroids[i].speed * Cos(asteroids[i].angle);
