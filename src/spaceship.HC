@@ -19,7 +19,10 @@ U0 updateSpaceship() {
         y = newY;
     }
 
-    if(speed > 0){
+    if(-0.5 <= speed && speed <= 0.5){
+        speed = 0;
+    }
+    else if(speed > 0){
         speed -= 0.1;
     }
     else if(speed < 0){
