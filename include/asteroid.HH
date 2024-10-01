@@ -6,6 +6,7 @@ class Asteroid {
     I16 y;
     U8 z;
     F64 angle;
+    F64 displayAngle;
     U8 speed;
     Bool active;
     U8 size;

@@ -5,6 +5,7 @@ class Asteroid {
     I16 y;
     U8 z;
     F64 angle;
+    F64 displayAngle;
     U8 speed;
     Bool active;
     U8 size;
@@ -19,6 +20,7 @@ U0 InitialiseAsteroids() {
         asteroids[i].y = 0;
         asteroids[i].z = 0;
         asteroids[i].angle = 0;
+        asteroids[i].displayAngle = 0;
         asteroids[i].speed = 0;
         asteroids[i].active = FALSE;
         asteroids[i].size = 3; // Default size
@@ -117,6 +119,7 @@ U0 UpdateAsteroids() {
         if (asteroids[i].active) {
             asteroids[i].x += asteroids[i].speed * Cos(asteroids[i].angle);
             asteroids[i].y += asteroids[i].speed * Sin(asteroids[i].angle);
+            asteroids[i].displayAngle += 0.1;
 
             hasBeenShot(i);
 
