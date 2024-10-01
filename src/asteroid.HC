@@ -100,7 +100,12 @@ U0 hasBeenHit(U8 index) {
             if (bullets[i].x > asteroids[index].x - 20 && bullets[i].x < asteroids[index].x + 20 && bullets[i].y > asteroids[index].y - 20 && bullets[i].y < asteroids[index].y + 20) {
                 bullets[i].active = FALSE;
                 bullets[i].speed = 0;
-                SplitAsteroid(index);
+                if (asteroids[index].size > 1) {
+                    SplitAsteroid(index);
+                }
+                else {
+                    asteroids[index].active = FALSE;
+                }
             }
         }
     }
