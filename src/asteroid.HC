@@ -59,6 +59,7 @@ U0 ActivateAsteroid() {
                     break;
             }
 
+            asteroids[i].size = RandU16() % 3 + 1; // Random size between 1 and 3
             asteroids[i].speed = 5 + (RandU16() % 5); // Random speed between 5 and 10
             asteroids[i].active = TRUE;
             break;
