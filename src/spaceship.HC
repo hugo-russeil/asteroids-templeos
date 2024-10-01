@@ -6,8 +6,18 @@ F64 angle = 0;
 F64 speed = 0.0;
 
 U0 updateSpaceship() {
-    x += speed * Cos(angle);
-    y += speed * Sin(angle);
+
+    I16 newX, newY;
+
+    newX = x + speed * Cos(angle);
+    newY = y + speed * Sin(angle);
+
+    if(newX > 0 && newX < 640){
+        x = newX;
+    }
+    if(newY > 0 && newY < 480){
+        y = newY;
+    }
 
     if(speed > 0){
         speed -= 0.1;

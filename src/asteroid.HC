@@ -27,7 +27,7 @@ U0 InitialiseAsteroids() {
 
 U0 ActivateAsteroid() {
     U8 i;
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 10; i++) { // Only has access to the first 10 slots as to not fill up the array, space will be needed for splitting asteroids
         if (!asteroids[i].active) {
             U16 side = RandU16() % 4; // Random side of the screen
             switch (side) {
@@ -71,7 +71,7 @@ U0 SplitAsteroid(U8 index) {
             if (!asteroids[i].active) {
                 asteroids[i].x = asteroids[index].x;
                 asteroids[i].y = asteroids[index].y;
-                asteroids[i].angle = asteroids[index].angle + 10;
+                asteroids[i].angle = asteroids[index].angle + 0.17; // 1.6 being 90°, so 0.17 is about 10°, I don't know don't ask
                 asteroids[i].speed = asteroids[index].speed;
                 asteroids[i].active = TRUE;
                 asteroids[i].size = asteroids[index].size - 1;
@@ -82,7 +82,7 @@ U0 SplitAsteroid(U8 index) {
             if (!asteroids[i].active) {
                 asteroids[i].x = asteroids[index].x;
                 asteroids[i].y = asteroids[index].y;
-                asteroids[i].angle = asteroids[index].angle - 10;
+                asteroids[i].angle = asteroids[index].angle - 0.17;
                 asteroids[i].speed = asteroids[index].speed;
                 asteroids[i].active = TRUE;
                 asteroids[i].size = asteroids[index].size - 1;
@@ -95,9 +95,9 @@ U0 SplitAsteroid(U8 index) {
 
 U0 hasBeenHit(U8 index) {
     U8 i;
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 20; i++) {
         if (bullets[i].active) {
-            if (bullets[i].x > asteroids[index].x - 10 && bullets[i].x < asteroids[index].x + 10 && bullets[i].y > asteroids[index].y - 10 && bullets[i].y < asteroids[index].y + 10) {
+            if (bullets[i].x > asteroids[index].x - 20 && bullets[i].x < asteroids[index].x + 20 && bullets[i].y > asteroids[index].y - 20 && bullets[i].y < asteroids[index].y + 20) {
                 bullets[i].active = FALSE;
                 bullets[i].speed = 0;
                 SplitAsteroid(index);
@@ -108,7 +108,7 @@ U0 hasBeenHit(U8 index) {
 
 U0 UpdateAsteroids() {
     U8 i;
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 20; i++) {
         if (asteroids[i].active) {
             asteroids[i].x += asteroids[i].speed * Cos(asteroids[i].angle);
             asteroids[i].y += asteroids[i].speed * Sin(asteroids[i].angle);

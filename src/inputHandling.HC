@@ -17,9 +17,9 @@ U0 HandleInput(Keys *keys){
         speed -= 1.0;
     }
     if (keys->left){
-        angle -= 0.1;
+        angle -= 0.15;
     }
     if (keys->right){
-        angle += 0.1;
+        angle += 0.15;
     }
 }
