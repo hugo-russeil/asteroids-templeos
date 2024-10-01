@@ -93,7 +93,7 @@ U0 SplitAsteroid(U8 index) {
     }
 }
 
-U0 hasBeenHit(U8 index) {
+U0 hasBeenShot(U8 index) {
     U8 i;
     for (i = 0; i < 20; i++) {
         if (bullets[i].active) {
@@ -118,7 +118,7 @@ U0 UpdateAsteroids() {
             asteroids[i].x += asteroids[i].speed * Cos(asteroids[i].angle);
             asteroids[i].y += asteroids[i].speed * Sin(asteroids[i].angle);
 
-            hasBeenHit(i);
+            hasBeenShot(i);
 
             // Deactivate asteroid if it goes too far offscreen
             if (asteroids[i].x < -1000 || asteroids[i].x > 1000 || asteroids[i].y < -1000 || asteroids[i].y > 1000) {

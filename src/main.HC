@@ -20,16 +20,16 @@ U0 Main() {
 
   Fs->draw_it = &DrawIt;
 
-  try {
-    while (TRUE) {
+  try{
+    while (!hasBeenHit()){
       switch (GetMsg(&arg1, &arg2, 1 << MSG_KEY_DOWN | 1 << MSG_KEY_UP)) {
         case MSG_KEY_DOWN:
-          switch (arg1) {
+          switch (arg1){
             case CH_SPACE: keys.space = TRUE; break;
             case CH_ESC: goto done;
 
             case 0:
-              switch (arg2.u8[0]) {
+              switch (arg2.u8[0]){
                 case SC_CURSOR_UP: keys.up = TRUE; break;
                 case SC_CURSOR_DOWN: keys.down = TRUE; break;
                 case SC_CURSOR_LEFT: keys.left = TRUE; break;
@@ -40,10 +40,10 @@ U0 Main() {
           break;
 
         case MSG_KEY_UP:
-          switch (arg1) {
+          switch (arg1){
             case CH_SPACE: keys.space = FALSE; break;
             case 0:
-              switch (arg2.u8[0]) {
+              switch (arg2.u8[0]){
                 case SC_CURSOR_UP: keys.up = FALSE; break;
                 case SC_CURSOR_DOWN: keys.down = FALSE; break;
                 case SC_CURSOR_LEFT: keys.left = FALSE; break;
@@ -59,7 +59,7 @@ U0 Main() {
   done:
   }
 
-  catch {
+  catch{
     PutExcept;
     SettingsPop;
     MenuPop;
@@ -67,4 +67,4 @@ U0 Main() {
   return;
 }
 
-Main;
+Main;

@@ -1,3 +1,6 @@
+#include "../include/spaceship.HH"
+#include "../include/asteroid.HH"
+
 I16 x = 250;
 I16 y = 250;
 U8 z = 0; // Always 0 so you get the least possible amount of memory.
@@ -19,7 +22,7 @@ U0 updateSpaceship() {
         y = newY;
     }
 
-    if(-0.5 <= speed && speed <= 0.5){
+    if(-0.05 <= speed && speed <= 0.05){
         speed = 0;
     }
     else if(speed > 0){
@@ -28,4 +31,23 @@ U0 updateSpaceship() {
     else if(speed < 0){
         speed += 0.1;
     }
+
+}
+
+// Check if the spaceship has been hit by an asteroid
+Bool hasBeenHit(){
+    U8 i;
+    for (i = 0; i < 20; i++) {
+        if (asteroids[i].active) {
+            if (asteroids[i].x > x - 20 && asteroids[i].x < x + 20 && asteroids[i].y > y - 20 && asteroids[i].y < y + 20) {
+                // Game over
+                x = 250;
+                y = 250;
+                speed = 0;
+                angle = 0;
+                return 1;
+            }
+        }
+    }
+    return 0;
 }
