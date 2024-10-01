@@ -45,7 +45,7 @@ U0 Main() {
             case 0:
               switch (arg2.u8[0]) {
                 case SC_CURSOR_UP: keys.up = FALSE; break;
-                case SC_CURSOR_DOWN: keys.down = FALSE; break;
+                case SC_CURSOR_DOWN: keys.down = FALSE; break;
                 case SC_CURSOR_LEFT: keys.left = FALSE; break;
                 case SC_CURSOR_RIGHT: keys.right = FALSE; break;
               }
@@ -67,4 +67,4 @@ U0 Main() {
   return;
 }
 
-Main;
+Main;
