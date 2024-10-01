@@ -9,12 +9,12 @@ U0 HandleInput(Keys *keys){
         ShootBullet;
     }
     if (keys->up){
-        x += speed * Cos(angle);
-        y += speed * Sin(angle);
+        if (speed < 10.0)
+        speed += 1.0;
     }
     if (keys->down){
-        x -= speed * Cos(angle);
-        y -= speed * Sin(angle);
+        if (speed > -10.0)
+        speed -= 1.0;
     }
     if (keys->left){
         angle -= 0.1;

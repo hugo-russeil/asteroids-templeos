@@ -1,3 +1,5 @@
+#include "../include/bullet.HH"
+
 class Asteroid {
     I16 x;
     I16 y;
@@ -8,11 +10,11 @@ class Asteroid {
     U8 size;
 };
 
-Asteroid asteroids[10];
+Asteroid asteroids[20];
 
 U0 InitialiseAsteroids() {
     I8 i;
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 20; i++) {
         asteroids[i].x = 0;
         asteroids[i].y = 0;
         asteroids[i].z = 0;
@@ -65,7 +67,7 @@ U0 ActivateAsteroid() {
 U0 SplitAsteroid(U8 index) {
     if (asteroids[index].size > 1) {
         U8 i;
-        for (i = 0; i < 10; i++) {
+        for (i = 0; i < 20; i++) {
             if (!asteroids[i].active) {
                 asteroids[i].x = asteroids[index].x;
                 asteroids[i].y = asteroids[index].y;
@@ -76,7 +78,7 @@ U0 SplitAsteroid(U8 index) {
                 break;
             }
         }
-        for (i = 0; i < 10; i++) {
+        for (i = 0; i < 20; i++) {
             if (!asteroids[i].active) {
                 asteroids[i].x = asteroids[index].x;
                 asteroids[i].y = asteroids[index].y;
@@ -91,12 +93,27 @@ U0 SplitAsteroid(U8 index) {
     }
 }
 
+U0 hasBeenHit(U8 index) {
+    U8 i;
+    for (i = 0; i < 10; i++) {
+        if (bullets[i].active) {
+            if (bullets[i].x > asteroids[index].x - 10 && bullets[i].x < asteroids[index].x + 10 && bullets[i].y > asteroids[index].y - 10 && bullets[i].y < asteroids[index].y + 10) {
+                bullets[i].active = FALSE;
+                bullets[i].speed = 0;
+                SplitAsteroid(index);
+            }
+        }
+    }
+}
+
 U0 UpdateAsteroids() {
     U8 i;
     for (i = 0; i < 10; i++) {
         if (asteroids[i].active) {
             asteroids[i].x += asteroids[i].speed * Cos(asteroids[i].angle);
             asteroids[i].y += asteroids[i].speed * Sin(asteroids[i].angle);
+
+            hasBeenHit(i);
 
             // Deactivate asteroid if it goes too far offscreen
             if (asteroids[i].x < -1000 || asteroids[i].x > 1000 || asteroids[i].y < -1000 || asteroids[i].y > 1000) {

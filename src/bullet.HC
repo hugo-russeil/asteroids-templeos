@@ -1,4 +1,5 @@
 #include "./spaceship.HC"
+#include "../include/bullet.HH"
 
 class Bullet{
     I16 x;
