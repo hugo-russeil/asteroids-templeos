@@ -1,4 +1,5 @@
 #include "./inputHandling.HC"
+#include "../include/saucer.HH"
 
 Keys keys;
 
@@ -14,9 +15,11 @@ U0 Main() {
   DocCursor;
   DocClear;
 
+  //Initialise the game
   Seed;
   InitialiseBullets;
   InitialiseAsteroids;
+  InitialiseSaucers;
 
   Fs->draw_it = &DrawIt;
 
@@ -24,7 +27,7 @@ U0 Main() {
     while (!hasBeenHit()){
       switch (GetMsg(&arg1, &arg2, 1 << MSG_KEY_DOWN | 1 << MSG_KEY_UP)) {
         case MSG_KEY_DOWN:
-          switch (arg1){
+          switch (arg1){
             case CH_SPACE: keys.space = TRUE; break;
             case CH_ESC: goto done;
 
