@@ -1,5 +1,6 @@
 #include "../include/spaceship.HH"
 #include "../include/asteroid.HH"
+#include "../include/playerScore.HH"
 
 I16 x = 250;
 I16 y = 250;
@@ -45,6 +46,9 @@ Bool hasBeenHit(){
                 y = 250;
                 speed = 0;
                 angle = 0;
+
+                playerScore = 0;
+
                 return 1;
             }
         }

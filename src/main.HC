@@ -1,5 +1,6 @@
 #include "./inputHandling.HC"
 #include "../include/saucer.HH"
+#include "../include/playerScore.HH"
 
 Keys keys;
 
@@ -15,16 +16,18 @@ U0 Main() {
   DocCursor;
   DocClear;
 
-  //Initialise the game
+  //Initialise the game
   Seed;
   InitialiseBullets;
   InitialiseAsteroids;
   InitialiseSaucers;
 
+  playerScore = 0;
+
   Fs->draw_it = &DrawIt;
 
   try{
-    while (!hasBeenHit()){
+    while (1){
       switch (GetMsg(&arg1, &arg2, 1 << MSG_KEY_DOWN | 1 << MSG_KEY_UP)) {
         case MSG_KEY_DOWN:
           switch (arg1){
@@ -46,7 +49,7 @@ U0 Main() {
           switch (arg1){
             case CH_SPACE: keys.space = FALSE; break;
             case 0:
-              switch (arg2.u8[0]){
+              switch (arg2.u8[0]){
                 case SC_CURSOR_UP: keys.up = FALSE; break;
                 case SC_CURSOR_DOWN: keys.down = FALSE; break;
                 case SC_CURSOR_LEFT: keys.left = FALSE; break;

@@ -1,4 +1,5 @@
 #include "../include/bullet.HH"
+#include "../include/playerScore.HH"
 
 class Asteroid {
     I16 x;
@@ -109,6 +110,7 @@ U0 hasBeenShot(U8 index) {
                 else {
                     asteroids[index].active = FALSE;
                 }
+              playerScore += 10;
             }
         }
     }
